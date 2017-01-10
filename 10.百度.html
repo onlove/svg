@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: black;
+        }
+        #box{
+            margin: 0 auto;
+            width: 780px;
+            height: 400px;
+            background: url("img/bg.jpg") no-repeat;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <svg width="100%" height="100%" id="svg">
+    </svg>
+</div>
+<script>
+    window.onload = function () {
+        var svgNS = 'http://www.w3.org/2000/svg';
+        var oParent = document.getElementById("box");
+        var oSvg = document.getElementById('svg');
+
+        var oPolyLine = null;
+        var pointsNum = '';
+
+        function createTag (tag, attr) {
+            var oTag = document.createElementNS(svgNS, tag);
+
+            for(var key in attr) {
+                oTag.setAttribute(key, attr[key]);
+            }
+
+            return oTag;
+        }
+
+        oSvg.onmousedown = function(ev) {
+            var ev = ev || window.event;
+            if(!oPolyLine) {
+                oPolyLine = createTag('polyline', {
+                    'fill': 'none',
+                    'stroke': 'red',
+                    'stroke-width': '2'
+                });
+                oSvg.appendChild(oPolyLine);
+            }
+
+            var x = ev.clientX - oParent.offsetLeft;
+            var y = ev.clientY - oParent.offsetTop;
+
+            if(pointsNum == '') {
+                pointsNum = x + ',' + y;
+            }else{
+                pointsNum += ',' + x + ',' + y;
+            }
+
+            oPolyLine.setAttribute('points', pointsNum)
+        };
+
+        oSvg.onmousemove = function (ev) {
+            var ev = ev || window.event;
+            if(oPolyLine) {
+                var x = ev.clientX - oParent.offsetLeft;
+                var y = ev.clientY - oParent.offsetTop;
+
+                oPolyLine.setAttribute('points', pointsNum + ',' + x + ',' + y);
+            }
+        }
+
+        oSvg.oncontextmenu = function () {
+            oSvg.onmousemove = null;
+            return false;
+        }
+
+    }
+</script>
+</body>
+</html>

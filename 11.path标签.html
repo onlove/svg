@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: black;
+        }
+        #box{
+            margin: 0 auto;
+            width: 780px;
+            height: 400px;
+            background: url("img/bg.jpg") no-repeat;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <svg width="100%" height="100%" id="svg">
+        <!--<path d="M50 100L200 200L100 100Z" fill='none' stroke="black" stroke-width="2"></path>-->
+        <!--<path d="M50 100H200V200" fill='none' stroke="black" stroke-width="2"></path>-->
+        <path d="M100 100A150 100 20 1 0 200 200" stroke="black" stroke-width="2" fill="none"></path>
+    </svg>
+   <!--
+       M  起始点坐标
+       L  后续坐标点
+       Z  闭合
+       V  垂直绘制
+       H  水平绘制
+       A
+         x半径
+         y半径
+         角度
+         弧长
+            - 0 小弧  1 大弧
+         方向
+            - 0 逆时针 1顺时针
+         终点x轴坐标
+         终点y轴坐标
+
+       大写绝对坐标
+       小写相对坐标
+   -->
+</div>
+
+</body>
+</html>
